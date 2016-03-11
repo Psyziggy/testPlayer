@@ -246,8 +246,8 @@
 	function getData() 
 	{
 		// Our <video> element will be the audio source.
-		audioSource.connect(gainNode);
-		gainNode.connect(context.destination);
+		audioSource.connect(context.destination);
+	//	gainNode.connect(context.destination);
 		videoPlayer.play();
         }
 	function togglePlayPause() 
@@ -265,9 +265,8 @@
 	} 
 	function stopPlayer() 
 	{
-		audioSource.stop(0);
-		videoPlayer.currentTime = 0;
 		videoPlayer.pause();
+		videoPlayer.currentTime = 0;
 		changeButtonType(playPauseBtn, 'play');
 		titleCard.style.visibility = 'visible';
 	}
