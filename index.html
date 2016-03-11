@@ -243,8 +243,8 @@
 	function getData() 
 	{
 		// Our <video> element will be the audio source.
-		audioSource.connect(context.destination);
-	//	gainNode.connect(context.destination);
+		audioSource.connect(gainNode);
+		gainNode.connect(context.destination);
 		videoPlayer.play();
         }
 	function togglePlayPause() 
