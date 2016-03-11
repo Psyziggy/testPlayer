@@ -243,6 +243,7 @@
 	function getData() 
 	{
 		// Our <video> element will be the audio source.
+		audioSource.playbackRate = 0.5;
 		videoPlayer.playbackRate = 0.5;
 		audioSource.connect(gainNode);
 		gainNode.connect(context.destination);
