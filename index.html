@@ -206,8 +206,8 @@
 	var new_volValue;
 	
 	var context = new (window.AudioContext || window.webkitAudioContext)();
-	var gainNode = context.createGain();
 	var audioSource = context.createMediaElementSource(videoPlayer);
+	var gainNode = context.createGain();
         
 	document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
 	
@@ -255,15 +255,12 @@
 		if (videoPlayer.paused || videoPlayer.ended) {
 			videoPlayer.playbackRate = spdValue;
 			changeButtonType(playPauseBtn, 'pause');
-			videoPlayer.play();
 			titleCard.style.visibility = 'hidden';
 			getData();
-  			audioSource.play();
 		}
 		else { 
 			changeButtonType(playPauseBtn, 'play'); 
 			videoPlayer.pause();
-			audioSource.stop(0);
 		}
 	} 
 	function stopPlayer() 
