@@ -1,1 +1,1 @@
-# testPlayer
+# myVideoPlayer
