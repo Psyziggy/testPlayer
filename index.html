@@ -204,10 +204,14 @@
 	var volValue = 3.0;
 	var spdValue = 1.0;
 	var new_volValue;
-	
+	/*
 	var context = new (window.AudioContext || window.webkitAudioContext)();
 	var audioSource = context.createMediaElementSource(videoPlayer);
-	var gainNode = context.createGain();
+	var gainNode = context.createGain();*/
+	
+	var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+	var source;
+	var songLength;
         
 	document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
 	
@@ -240,6 +244,37 @@
 		videoPlayer.controls = false;
 	}
 	
+	function getData() {
+		source = audioCtx.createBufferSource();
+		request = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+				document.getElementById("demo").innerHTML = xhttp.responseText;
+			}
+		};
+		request.open('GET', 'KSound.mp3', true);
+		
+		request.responseType = 'arraybuffer';
+		
+		
+		request.onload = function() {
+			var audioData = request.response;
+			
+			audioCtx.decodeAudioData(audioData, function(buffer) {
+				myBuffer = buffer;
+				songLength = buffer.duration;
+				source.buffer = myBuffer;
+				//source.playbackRate.value = playbackControl.value;
+				source.connect(audioCtx.destination);
+				source.loop = false;
+				source.start(0);
+			},
+			function(e){"Error with decoding audio data" + e.err});
+		}
+		request.send();
+		videoPlayer.play();
+	}
+	
 	function getData() 
 	{
 		// Our <video> element will be the audio source.
@@ -247,7 +282,7 @@
 		videoPlayer.playbackRate = 0.5;
 		audioSource.connect(gainNode);
 		gainNode.connect(context.destination);
-		videoPlayer.play();
+		getData();
         }
 	function togglePlayPause() 
 	{ 
