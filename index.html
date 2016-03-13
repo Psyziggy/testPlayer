@@ -246,17 +246,14 @@
 	
 	function getData() {
 		source = audioCtx.createBufferSource();
-		request = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-			if (xhttp.readyState == 4 && xhttp.status == 200) {
-				document.getElementById("demo").innerHTML = xhttp.responseText;
+		var request = new XMLHttpRequest();/*
+		request.onreadystatechange = function() {
+			if (request.readyState == 4 && request.status == 200) {
+				document.getElementById("demo").innerHTML = request.responseText;
 			}
 		};
-		request.open('GET', 'KSound.mp3', true);
-		
+		*/request.open('GET', 'KSound.mp3', true);
 		request.responseType = 'arraybuffer';
-		
-		
 		request.onload = function() {
 			var audioData = request.response;
 			
