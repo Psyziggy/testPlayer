@@ -208,8 +208,8 @@
 	var context = new (window.AudioContext || window.webkitAudioContext)();
 	var audioSource = context.createMediaElementSource(videoPlayer);
 	var gainNode = context.createGain();*/
-	var audioSource = context.createMediaElementSource(videoPlayer);
 	var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+	var audioSource = audioCtx.createMediaElementSource(videoPlayer);
 	var source;
 	var songLength;
         
