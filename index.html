@@ -264,12 +264,12 @@
 				source.connect(audioCtx.destination);
 				source.loop = false;
 				source.start(0);
-				alert("SoundOn!");
+				//alert("SoundOn!");
+				videoPlayer.play();
 			},
 			function(e){"Error with decoding audio data" + e.err});
 		}
 		request.send();
-		//videoPlayer.play();
 	}
 	/*function getData() 
 	{
