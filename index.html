@@ -178,9 +178,9 @@
 			<div id='moviePlayer'>
 				<img id="titleCard"></img>
 				<video id='videoClips' controls="false">
-					<!--<source src='KClip.mp4'></video>
+					<source src='movieClip/KClip.mp4'></video>
 					<source src='movieClip/KClip.webm' type='video/webm'>
-					<source src='movieClip/KClip.ogg' type='video/ogg'>--></video>
+					<source src='movieClip/KClip.ogg' type='video/ogg'></video>
 			     <div id="controlPanel">
 					<button id="playPauseButton" class="play" title="Play" alt="PLAY" onclick="togglePlayPause();"></button>
 					<button id="stopButton" class="bstop" title="Stop" alt="STOP" onclick="stopPlayer();"></button>
@@ -209,7 +209,6 @@
 	var audioSource = context.createMediaElementSource(videoPlayer);
 	var gainNode = context.createGain();*/
 	var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-	var audioSource = audioCtx.createMediaElementSource(videoPlayer);
 	var source;
 	var songLength;
         
@@ -252,7 +251,7 @@
 				document.getElementById("demo").innerHTML = request.responseText;
 			}
 		};
-		*/request.open('GET', "KCLips.mp4", true);
+		*/request.open('GET', "KCLips.mp3", true);
 		request.responseType = 'arraybuffer';
 		request.onload = function() {
 			var audioData = request.response;
@@ -269,7 +268,8 @@
 			function(e){"Error with decoding audio data" + e.err});
 		}
 		request.send();
-		videoPlayer.play();
+		alert("SoundOn!");
+		//videoPlayer.play();
 	}
 	/*function getData() 
 	{
