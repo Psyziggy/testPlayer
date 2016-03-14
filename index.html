@@ -239,6 +239,8 @@
 		request.onload = function(){
 			var audioData = request.response;
 			audioCtx.decodeAudioData(audioData, function(buffer){
+				videoPlayer.load();
+				videoPlayer.play();
 				myBuffer = buffer;
 				songLength = buffer.duration;
 				source.buffer = myBuffer;
@@ -250,7 +252,6 @@
 			function(e){alert("Error!");});
 		}
 		request.send();
-		videoPlayer.play();
 	}
 	/*function getData(){
 		// Our <video> element will be the audio source.
@@ -335,7 +336,7 @@
 		btn.title = value;
 		btn.className = value;
 	}
-	function loadVideo() {
+	/*function loadVideo() {
 		for (var i = 0; i < arguments.length; i++) {
 			var file = arguments[i].split('.');
 			var ext = file[file.length - 1];
@@ -353,7 +354,7 @@
 		var ableToPlay = videoPlayer.canPlayType('video/' + ext);
 		if (ableToPlay == '') return false;
 		else return true;
-	}
+	}*/
 	function resetPlayer(){
 		videoPlayer.currentTime = 0;
 		changeButtonType(playPauseBtn, 'play');
