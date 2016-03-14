@@ -244,10 +244,10 @@
 				songLength = buffer.duration;
 				source.buffer = myBuffer;
 				//source.playbackRate.value = playbackControl.value;
+				videoPlayer.play();
 				source.connect(audioCtx.destination);
 				source.loop = false;
 				source.start(0);
-				videoPlayer.play();
 				//alert("SoundOn!");
 				//videoPlayer.play();
 			},
