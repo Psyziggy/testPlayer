@@ -238,9 +238,8 @@
 		request.responseType = 'arraybuffer';
 		request.onload = function(){
 			var audioData = request.response;
-			
+			videoPlayer.play();
 			audioCtx.decodeAudioData(audioData, function(buffer){
-				videoPlayer.play();
 				myBuffer = buffer;
 				songLength = buffer.duration;
 				source.buffer = myBuffer;
