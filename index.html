@@ -240,7 +240,7 @@
 			var audioData = request.response;
 			audioCtx.decodeAudioData(audioData, function(buffer){
 				videoPlayer.load();
-				videoPlayer.play();
+playClips();			         //videoPlayer.play();
 				myBuffer = buffer;
 				songLength = buffer.duration;
 				source.buffer = myBuffer;
@@ -261,6 +261,9 @@
 		gainNode.connect(context.destination);
 		getData();
         }*/
+        function playClips(){
+        videoPlayer.play();
+        }
 	function togglePlayPause() { 
 		if (videoPlayer.paused || videoPlayer.ended) {
 			videoPlayer.playbackRate = spdValue;
