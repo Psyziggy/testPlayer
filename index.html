@@ -22,8 +22,7 @@
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
 		<style>
-			body
-			{ 
+			body{ 
 				font-family:'MSSansSerif', sans-serif, Helvetica, Arial;
 				font-size:32px;
 				color:#ffffff;
@@ -36,18 +35,15 @@
 				position: relative;
 				overflow: hidden !important;
 			}
-			div#playerRegion > div#moviePlayer {
+			div#playerRegion > div#moviePlayer{
 				position: absolute !important;
 				top: 0; bottom: 0; left: 0; right: 0;
 				text-align: center;	
 			}
-			
-			div#moviePlayer,video
-			{
+			div#moviePlayer,video{
 				width: inherit !important;
 			}
-			div#moviePlayer  > img
-			{
+			div#moviePlayer  > img{
 				position: absolute;
 				width: inherit !important; 
 				height:100%;
@@ -59,9 +55,7 @@
 				-webkit-background-size: 100% auto;           /* Safari 3.0 */
 				-moz-border-image: url("images/kTitleCardb.jpg") 0;
 			}
-			
-			div#controlPanel
-			{
+			div#controlPanel{
 				position: absolute;
 				width: 100%;
 				bottom: 0;
@@ -75,13 +69,10 @@
 				-webkit-transition: height .25s ease-in-out;
 				-o-background-transition: height .25s ease-in-out;
 			}
-			div#moviePlayer:hover > div#controlPanel
-			{
+			div#moviePlayer:hover > div#controlPanel{
 				height: 44px;
 			}
-			
-			button 
-			{
+			button{
 				position: relative;
 				background-color: transparent;
 				background-image: url("images/bttnIcons.gif");
@@ -100,9 +91,7 @@
 				-o-background-size: translateY(-50%);
 				transform: translateY(-50%);
 			}
-			
-			#videoVolume,#videoSpeed
-			{
+			#videoVolume,#videoSpeed{
 				position: relative;
 				display:inline-block;
 				color: #ffffff;
@@ -112,20 +101,15 @@
 				margin:0;
 				top:-21px;
 			}
-			#videoSpeed
-			{
+			#videoSpeed{
 				width:200px;
 			}
-			 
-			@-moz-document url-prefix()
-			{ 
-				#videoVolume,#videoSpeed
-				{
+			@-moz-document url-prefix(){ 
+				#videoVolume,#videoSpeed{
 					top:-5px;
 				}
 			}
-			@-webkit-document url-prefix() 
-			{
+			@-webkit-document url-prefix() {
 				#videoVolume,#videoSpeed{
 					position: absolute;
 					margin-top:50px; 
@@ -214,8 +198,7 @@
         
 	document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
 	
-	function initialiseMediaPlayer() 
-	{	
+	function initialiseMediaPlayer(){	
 		//gainNode.gain.value = 1.0;
 	
 		document.getElementById("videoVolume").innerHTML = "VOLUME: "+volValue.toFixed();
@@ -223,16 +206,16 @@
 		
 		//videoPlayer.volume = (volValue / 11)*0.2;
 		
-		videoPlayer.addEventListener('play', function() {
+		videoPlayer.addEventListener('play', function(){
 			//
 			changeButtonType(playPauseBtn, 'pause');
 		}, false);
-		videoPlayer.addEventListener('pause', function() {
+		videoPlayer.addEventListener('pause', function(){
 			//
 			changeButtonType(playPauseBtn, 'play');
 		}, false);
 		 
-		videoPlayer.addEventListener('volumechange', function(e) { 
+		videoPlayer.addEventListener('volumechange', function(e){ 
 			// 
 			if (videoPlayer.muted) 
 				changeButtonType(muteBtn, 'mute');
@@ -246,17 +229,17 @@
 	function getData() {
 		source = audioCtx.createBufferSource();
 		var request = new XMLHttpRequest();/*
-		request.onreadystatechange = function() {
+		request.onreadystatechange = function(){
 			if (request.readyState == 4 && request.status == 200) {
 				document.getElementById("demo").innerHTML = request.responseText;
 			}
 		};
 		*/request.open('GET', "KSound.mp3", true);
 		request.responseType = 'arraybuffer';
-		request.onload = function() {
+		request.onload = function(){
 			var audioData = request.response;
 			
-			audioCtx.decodeAudioData(audioData, function(buffer) {
+			audioCtx.decodeAudioData(audioData, function(buffer){
 				myBuffer = buffer;
 				songLength = buffer.duration;
 				source.buffer = myBuffer;
@@ -265,14 +248,13 @@
 				source.loop = false;
 				source.start(0);
 				//alert("SoundOn!");
-				videoPlayer.play();
+				//videoPlayer.play();
 			},
 			function(e){"Error with decoding audio data" + e.err});
 		}
 		request.send();
 	}
-	/*function getData() 
-	{
+	/*function getData(){
 		// Our <video> element will be the audio source.
 		audioSource.playbackRate = 0.5;
 		videoPlayer.playbackRate = 0.5;
@@ -280,55 +262,47 @@
 		gainNode.connect(context.destination);
 		getData();
         }*/
-	function togglePlayPause() 
-	{ 
+	function togglePlayPause() { 
 		if (videoPlayer.paused || videoPlayer.ended) {
 			videoPlayer.playbackRate = spdValue;
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
 			getData();
+			videoPlayer.play();
 		}
-		else { 
+		else{ 
 			changeButtonType(playPauseBtn, 'play'); 
 			videoPlayer.pause();
 		}
 	} 
-	function stopPlayer() 
-	{
+	function stopPlayer() {
 		source.stop(0);
 		videoPlayer.pause();
 		videoPlayer.currentTime = 0;
 		changeButtonType(playPauseBtn, 'play');
 		titleCard.style.visibility = 'visible';
 	}
-	function toggleMute() 
-	{
-		if (videoPlayer.muted) 
-		{
+	function toggleMute() {
+		if (videoPlayer.muted) {
 			changeButtonType(muteBtn, 'Unmute'); 
 			videoPlayer.muted = false;
 		}
-		else 
-		{
+		else {
 			changeButtonType(muteBtn, 'Mute');
 			videoPlayer.muted = true;
 		}
 	}
-	function changeVolume(id, vVal) 
-	{
+	function changeVolume(id, vVal){
+		
 		new_volValue = volValue + vVal;
 		
-		if (new_volValue < 0) 
-		{
+		if (new_volValue < 0) {
 			new_volValue = 0;
 		}
-		else if (new_volValue > 11) 
-		{
+		else if (new_volValue > 11){
 			new_volValue = 11;
 		}
-		
-		if (new_volValue > 10) 
-		{
+		if (new_volValue > 10) {
 			document.getElementById("videoVolume").style.color = "#FFFF00";
 			document.getElementById("videoVolume").style.fontWeight="bolder";
 			document.getElementById("videoVolume").innerHTML = "VOLUME: "+new_volValue.toFixed()+"!!!";
@@ -341,16 +315,13 @@
 		}
 		volValue = new_volValue;
 	}
-	function changeSpeed(id, sVal) 
-	{
+	function changeSpeed(id, sVal){
 		var new_spdValue = spdValue + sVal;
 		
-		if (new_spdValue < 0.1) 
-		{
+		if (new_spdValue < 0.1){
 			new_spdValue = 0.1;
 		}
-		else if (new_spdValue > 2.0) 
-		{
+		else if (new_spdValue > 2.0){
 			new_spdValue = 2.0;
 		}
 		spdValue = new_spdValue;
@@ -358,12 +329,11 @@
 		getData();
 		document.getElementById("videoSpeed").innerHTML = "SPEED: x"+(new_spdValue.toFixed(1));
 	}
-	function replayMedia() 
-	{
+	function replayMedia(){
 		resetPlayer();
 		videoPlayer.play();
 	} 
-	function changeButtonType(btn, value) {
+	function changeButtonType(btn, value){
 		btn.title = value;
 		btn.className = value;
 	}
@@ -381,12 +351,12 @@
 			}
 		}
 	} 
-	function canPlayVideo(ext) {
+	function canPlayVideo(ext){
 		var ableToPlay = videoPlayer.canPlayType('video/' + ext);
 		if (ableToPlay == '') return false;
 		else return true;
 	}
-	function resetPlayer() {
+	function resetPlayer(){
 		videoPlayer.currentTime = 0;
 		changeButtonType(playPauseBtn, 'play');
 	}
