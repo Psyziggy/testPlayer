@@ -247,6 +247,7 @@
 				source.connect(audioCtx.destination);
 				source.loop = false;
 				source.start(0);
+				videoPlayer.play();
 				//alert("SoundOn!");
 				//videoPlayer.play();
 			},
@@ -268,7 +269,7 @@
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
 			getData();
-			videoPlayer.play();
+			//videoPlayer.play();
 		}
 		else{ 
 			changeButtonType(playPauseBtn, 'play'); 
