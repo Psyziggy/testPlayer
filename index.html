@@ -200,7 +200,7 @@
 	
 	function initialiseMediaPlayer(){	
 		//gainNode.gain.value = 1.0;
-	
+		getData();
 		document.getElementById("videoVolume").innerHTML = "VOLUME: "+volValue.toFixed();
 		document.getElementById("videoSpeed").innerHTML = "SPEED: x"+spdValue.toFixed(1);
 		
@@ -239,15 +239,15 @@
 		request.onload = function(){
 			var audioData = request.response;
 			audioCtx.decodeAudioData(audioData, function(buffer){
-				videoPlayer.load();
-playClips();			         //videoPlayer.play();
+				//videoPlayer.load();
+				//videoPlayer.play();
 				myBuffer = buffer;
 				songLength = buffer.duration;
 				source.buffer = myBuffer;
 				//source.playbackRate.value = playbackControl.value;
 				source.connect(audioCtx.destination);
 				source.loop = false;
-				source.start(0);
+				alert("Ready");
 			},
 			function(e){alert("Error!");});
 		}
@@ -260,20 +260,22 @@ playClips();			         //videoPlayer.play();
 		audioSource.connect(gainNode);
 		gainNode.connect(context.destination);
 		getData();
-        }*/
-        function playClips(){
-        videoPlayer.play();
         }
+        function playClips() {
+        videoPlayer.play();
+        }*/
 	function togglePlayPause() { 
 		if (videoPlayer.paused || videoPlayer.ended) {
 			videoPlayer.playbackRate = spdValue;
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
-			getData();
-			//videoPlayer.play();
+			//getData();
+			source.start(0);
+			videoPlayer.play();
 		}
 		else{ 
 			changeButtonType(playPauseBtn, 'play'); 
+			source.stop(0);	
 			videoPlayer.pause();
 		}
 	} 
