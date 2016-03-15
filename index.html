@@ -277,6 +277,7 @@
 			changeButtonType(playPauseBtn, 'play'); 
 			source.stop(0);	
 			videoPlayer.pause();
+			getData();
 		}
 	} 
 	function stopPlayer() {
@@ -285,6 +286,7 @@
 		videoPlayer.currentTime = 0;
 		changeButtonType(playPauseBtn, 'play');
 		titleCard.style.visibility = 'visible';
+		getData();
 	}
 	function toggleMute() {
 		if (videoPlayer.muted) {
@@ -335,6 +337,7 @@
 	}
 	function replayMedia(){
 		resetPlayer();
+		source.start(0);
 		videoPlayer.play();
 	} 
 	function changeButtonType(btn, value){
