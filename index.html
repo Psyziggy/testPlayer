@@ -280,6 +280,7 @@
 			}
 			request.send();
 			source.start(0);
+			videoPlayer.currentTime = audioCtx.currentTime;
 			videoPlayer.play();
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
