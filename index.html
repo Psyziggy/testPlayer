@@ -254,7 +254,6 @@
 				//source.playbackRate.value = playbackControl.value;
 				source.connect(audioCtx.destination);
 				source.loop = false;
-				source.start(0);
 				//playPauseBtn.removeAttribute('disabled');
 				//alert("Ready");
 			},
@@ -275,12 +274,12 @@
         }*/
 	function togglePlayPause() { 
 		if (videoPlayer.paused || videoPlayer.ended) {
-			videoPlayer.playbackRate = spdValue;
-			videoPlayer.play();
+			getData();
+			source.start(0);
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
-			getData();
-			//source.start(0);
+			videoPlayer.playbackRate = spdValue;
+			videoPlayer.play();
 		}
 		else{ 
 			changeButtonType(playPauseBtn, 'play'); 
