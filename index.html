@@ -261,10 +261,8 @@
 			};*/
 			request.open('GET', "KSound.mp3", true);
 			request.responseType = 'arraybuffer';
-			videoPlayer.play();
 			request.onload = function(){
 				var audioData = request.response;
-				videoPlayer.play();
 				audioCtx.decodeAudioData(audioData, function(buffer){
 					myBuffer = buffer;
 					songLength = buffer.duration;
@@ -272,8 +270,7 @@
 					//source.playbackRate.value = playbackControl.value;
 					source.connect(audioCtx.destination);
 					source.loop = false;
-					source.start(0);
-					videoPlayer.play();
+					//source.start(0);
 					//test();
 					bIsReady = true; //audio is ready
 					//playPauseBtn.removeAttribute('disabled');
@@ -282,6 +279,8 @@
 				function(e){alert("Error!");});
 			}
 			request.send();
+			source.start(0);
+			videoPlayer.play();
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
 		}
