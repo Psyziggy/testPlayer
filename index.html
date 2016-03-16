@@ -196,9 +196,11 @@
 	var context = new (window.AudioContext || window.webkitAudioContext)();
 	var audioSource = context.createMediaElementSource(videoPlayer);
 	var gainNode = context.createGain();*/
-	var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-	var source;
-	var songLength;
+	var context = new (window.AudioContext || window.webkitAudioContext)();
+	//var source;
+	//var songLength;
+	var dogBarkingBuffer = null;
+	var source = context.createBufferSource(); // creates a sound source
         
 	document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
 	
@@ -209,6 +211,54 @@
 		    	//engine.getSettings().setMediaPlaybackRequiresUserGesture(false);
 		    	alert("POOP");
 		}*/
+		
+		var request = new XMLHttpRequest();
+		request.open('GET', 'KSound.mp3', true);
+		request.responseType = 'arraybuffer';
+		
+		// Decode asynchronously
+		request.onload = function() {
+			context.decodeAudioData(request.response, function(buffer) {
+				dogBarkingBuffer = buffer;
+			}, onError);
+		}
+		request.send();
+		
+		/*source = audioCtx.createBufferSource();
+		var request = new XMLHttpRequest();
+		request.onreadystatechange = function(){
+			if (request.readyState == 4 && request.status == 200) {
+				videoPlayer.play();
+			}
+		};
+		request.open('GET', "KSound.mp3", true);
+		request.responseType = 'arraybuffer';
+		// Decode asynchronously
+		request.onload = function() {
+			context.decodeAudioData(request.response, function(buffer) {
+				dogBarkingBuffer = buffer;
+			}, onError);
+		}
+		request.send();
+		
+		request.onload = function(){
+			var audioData = request.response;
+			audioCtx.decodeAudioData(audioData, function(buffer){
+				myBuffer = buffer;
+				songLength = buffer.duration;
+				source.buffer = myBuffer;
+				//source.playbackRate.value = playbackControl.value;
+				source.connect(audioCtx.destination);
+				source.loop = false;
+				//source.start(0);
+				//test();
+				bIsReady = true; //audio is ready
+				//playPauseBtn.removeAttribute('disabled');
+				//alert("Ready");
+			},
+			function(e){alert("Error!");});
+		}*/
+		request.send();
 		
 		//gainNode.gain.value = 1.0;
 		document.getElementById("videoVolume").innerHTML = "VOLUME: "+volValue.toFixed();
@@ -250,15 +300,19 @@
         function playClips() {
         videoPlayer.play();
         }*/
-	function togglePlayPause() { 
+	function togglePlayPause(buffer) { 
 		if (videoPlayer.paused || videoPlayer.ended) {
-			source = audioCtx.createBufferSource();
+			source.buffer = buffer;                    // tell the source which sound to play
+			source.connect(context.destination);       // connect the source to the context's destination (the speakers)
+			source.start(0);  
+			videoPlayer.play();
+			/*source = audioCtx.createBufferSource();
 			var request = new XMLHttpRequest();
-			/*request.onreadystatechange = function(){
+			request.onreadystatechange = function(){
 				if (request.readyState == 4 && request.status == 200) {
 					videoPlayer.play();
 				}
-			};*/
+			};
 			request.open('GET', "KSound.mp3", true);
 			request.responseType = 'arraybuffer';
 			request.onload = function(){
@@ -277,12 +331,11 @@
 					//alert("Ready");
 				},
 				function(e){alert("Error!");});
-			}
-			request.send();
-			audioCtx.currentTime = videoPlayer.currentTime;
-			source.start(0);
-			videoPlayer.currentTime = audioCtx.currentTime;
-			videoPlayer.play();
+			}*/
+			//request.send();
+			//audioCtx.currentTime = videoPlayer.currentTime;
+			//source.start(0);
+			//videoPlayer.currentTime = audioCtx.currentTime;
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
 		}
@@ -290,7 +343,7 @@
 			changeButtonType(playPauseBtn, 'play'); 
 			source.stop(0);	
 			videoPlayer.pause();
-			getData();
+			//getData();
 		}
 	} 
 	function test(){
