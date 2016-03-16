@@ -347,7 +347,7 @@
 	}
 	function replayMedia(){
 		resetPlayer();
-		source.start(0);
+		getData();
 		videoPlayer.play();
 	} 
 	function changeButtonType(btn, value){
@@ -374,6 +374,7 @@
 		else return true;
 	}*/
 	function resetPlayer(){
+		source.start(0);
 		videoPlayer.currentTime = 0;
 		changeButtonType(playPauseBtn, 'play');
 	}
