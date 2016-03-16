@@ -277,9 +277,9 @@
 			getData();
 			videoPlayer.playbackRate = spdValue;
 			videoPlayer.play();
+			source.start(0);
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
-			source.start(0);
 		}
 		else{ 
 			changeButtonType(playPauseBtn, 'play'); 
