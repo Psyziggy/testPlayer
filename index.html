@@ -188,9 +188,9 @@
 	var volValue = 3.0;
 	var spdValue = 1.0;
 	var new_volValue;
-	var controlPanel = document.getElementById('controlPanel');
-	controlPanel.setAttribute('disabled','disabled');
-	playPauseBtn.setAttribute('disabled','disabled');
+	//var controlPanel = document.getElementById('controlPanel');
+	//controlPanel.setAttribute('disabled','disabled');
+	//playPauseBtn.setAttribute('disabled','disabled');
 	/*
 	var context = new (window.AudioContext || window.webkitAudioContext)();
 	var audioSource = context.createMediaElementSource(videoPlayer);
@@ -254,7 +254,7 @@
 				//source.playbackRate.value = playbackControl.value;
 				source.connect(audioCtx.destination);
 				source.loop = false;
-				playPauseBtn.removeAttribute('disabled');
+				//playPauseBtn.removeAttribute('disabled');
 				//alert("Ready");
 			},
 			function(e){alert("Error!");});
