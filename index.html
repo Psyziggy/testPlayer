@@ -210,7 +210,6 @@
 		}*/
 		
 		//gainNode.gain.value = 1.0;
-		getData();
 		document.getElementById("videoVolume").innerHTML = "VOLUME: "+volValue.toFixed();
 		document.getElementById("videoSpeed").innerHTML = "SPEED: x"+spdValue.toFixed(1);
 		
@@ -256,7 +255,7 @@
 				source.connect(audioCtx.destination);
 				source.loop = false;
 				playPauseBtn.removeAttribute('disabled');
-				alert("Ready");
+				//alert("Ready");
 			},
 			function(e){alert("Error!");});
 		}
@@ -295,7 +294,6 @@
 		videoPlayer.currentTime = 0;
 		changeButtonType(playPauseBtn, 'play');
 		titleCard.style.visibility = 'visible';
-		getData();
 	}
 	function toggleMute() {
 		if (videoPlayer.muted) {
