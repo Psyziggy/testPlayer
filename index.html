@@ -278,12 +278,13 @@
 		if (videoPlayer.paused || videoPlayer.ended) {
 			getData();
 			//videoPlayer.playbackRate = spdValue;
-			if (bIsReady) {
+			/*if (bIsReady) {
 				videoPlayer.play();
 				source.start(0);
-			}
+			}*/
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
+			test();
 		}
 		else{ 
 			changeButtonType(playPauseBtn, 'play'); 
@@ -292,6 +293,10 @@
 			getData();
 		}
 	} 
+	function test(){
+		videoPlayer.play();
+		source.start(0);
+	}
 	function stopPlayer() {
 		source.stop(0);
 		videoPlayer.pause();
