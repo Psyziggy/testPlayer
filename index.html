@@ -188,6 +188,7 @@
 	var volValue = 3.0;
 	var spdValue = 1.0;
 	var new_volValue;
+	var bIsReady = false;
 	//var controlPanel = document.getElementById('controlPanel');
 	//controlPanel.setAttribute('disabled','disabled');
 	//playPauseBtn.setAttribute('disabled','disabled');
@@ -254,6 +255,7 @@
 				//source.playbackRate.value = playbackControl.value;
 				source.connect(audioCtx.destination);
 				source.loop = false;
+				bIsReady = true; //audio is ready
 				//playPauseBtn.removeAttribute('disabled');
 				//alert("Ready");
 			},
@@ -275,9 +277,11 @@
 	function togglePlayPause() { 
 		if (videoPlayer.paused || videoPlayer.ended) {
 			getData();
-			videoPlayer.playbackRate = spdValue;
-			videoPlayer.play();
-			source.start(0);
+			//videoPlayer.playbackRate = spdValue;
+			if (bIsReady) {
+				videoPlayer.play();
+				source.start(0);
+			{
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
 		}
@@ -292,6 +296,7 @@
 		source.stop(0);
 		videoPlayer.pause();
 		videoPlayer.currentTime = 0;
+		bIsReady = false;
 		changeButtonType(playPauseBtn, 'play');
 		titleCard.style.visibility = 'visible';
 	}
