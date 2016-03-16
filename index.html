@@ -257,6 +257,7 @@
 				//source.playbackRate.value = playbackControl.value;
 				source.connect(audioCtx.destination);
 				source.loop = false;
+				playPauseBtn.removeAttribute('disabled');
 				alert("Ready");
 			},
 			function(e){alert("Error!");});
@@ -279,8 +280,7 @@
 			videoPlayer.playbackRate = spdValue;
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
-			//getData();
-			source.start(-1);
+			source.start(0);
 			videoPlayer.play();
 		}
 		else{ 
