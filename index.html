@@ -237,32 +237,7 @@
 	}
 	
 	function getData(){
-		source = audioCtx.createBufferSource();
-		var request = new XMLHttpRequest();
-		/*request.onreadystatechange = function(){
-			if (request.readyState == 4 && request.status == 200) {
-				videoPlayer.play();
-			}
-		};*/
-		request.open('GET', "KSound.mp3", true);
-		request.responseType = 'arraybuffer';
-		request.onload = function(){
-			var audioData = request.response;
-			audioCtx.decodeAudioData(audioData, function(buffer){
-				myBuffer = buffer;
-				songLength = buffer.duration;
-				source.buffer = myBuffer;
-				//source.playbackRate.value = playbackControl.value;
-				source.connect(audioCtx.destination);
-				source.loop = false;
-				test();
-				bIsReady = true; //audio is ready
-				//playPauseBtn.removeAttribute('disabled');
-				//alert("Ready");
-			},
-			function(e){alert("Error!");});
-		}
-		request.send();
+		
 	}
 	/*function getData(){
 		// Our <video> element will be the audio source.
@@ -277,12 +252,34 @@
         }*/
 	function togglePlayPause() { 
 		if (videoPlayer.paused || videoPlayer.ended) {
-			getData();
-			//videoPlayer.playbackRate = spdValue;
-			/*if (bIsReady) {
-				videoPlayer.play();
-				source.start(0);
-			}*/
+			source = audioCtx.createBufferSource();
+			var request = new XMLHttpRequest();
+			/*request.onreadystatechange = function(){
+				if (request.readyState == 4 && request.status == 200) {
+					videoPlayer.play();
+				}
+			};*/
+			request.open('GET', "KSound.mp3", true);
+			request.responseType = 'arraybuffer';
+			request.onload = function(){
+				var audioData = request.response;
+				audioCtx.decodeAudioData(audioData, function(buffer){
+					myBuffer = buffer;
+					songLength = buffer.duration;
+					source.buffer = myBuffer;
+					//source.playbackRate.value = playbackControl.value;
+					source.connect(audioCtx.destination);
+					source.loop = false;
+					source.start(0);
+					videoPlayer.play();
+					//test();
+					bIsReady = true; //audio is ready
+					//playPauseBtn.removeAttribute('disabled');
+					//alert("Ready");
+				},
+				function(e){alert("Error!");});
+			}
+			request.send();
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
 		}
