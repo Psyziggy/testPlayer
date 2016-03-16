@@ -255,6 +255,7 @@
 				//source.playbackRate.value = playbackControl.value;
 				source.connect(audioCtx.destination);
 				source.loop = false;
+				test();
 				bIsReady = true; //audio is ready
 				//playPauseBtn.removeAttribute('disabled');
 				//alert("Ready");
@@ -262,7 +263,6 @@
 			function(e){alert("Error!");});
 		}
 		request.send();
-		test();
 	}
 	/*function getData(){
 		// Our <video> element will be the audio source.
