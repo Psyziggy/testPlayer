@@ -279,6 +279,7 @@
 				function(e){alert("Error!");});
 			}
 			request.send();
+			audioCtx.currentTime = videoPlayer.currentTime;
 			source.start(0);
 			videoPlayer.currentTime = audioCtx.currentTime;
 			videoPlayer.play();
