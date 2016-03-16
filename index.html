@@ -261,6 +261,7 @@
 			};*/
 			request.open('GET', "KSound.mp3", true);
 			request.responseType = 'arraybuffer';
+			videoPlayer.play();
 			request.onload = function(){
 				var audioData = request.response;
 				videoPlayer.play();
