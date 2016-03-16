@@ -255,6 +255,8 @@
 				source.connect(audioCtx.destination);
 				source.loop = false;
 				source.start(0);
+				videoPlayer.pause();
+				videoPlayer.play();
 				//playPauseBtn.removeAttribute('disabled');
 				//alert("Ready");
 			},
