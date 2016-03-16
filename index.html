@@ -199,12 +199,14 @@
 	document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
 	
 	function initialiseMediaPlayer(){	
+		int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+		
 		//var int SDK_INT = android.os.Build.VERSION.SDK_INT;
-		if (android.os.Build.VERSION.SDK_INT >= 17){
+		/*if (android.os.Build.VERSION.SDK_INT >= 17){
 		    	//Do something
 		    	//engine.getSettings().setMediaPlaybackRequiresUserGesture(false);
 		    	alert("POOP");
-		}
+		}*/
 		
 		//gainNode.gain.value = 1.0;
 		getData();
