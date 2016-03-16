@@ -220,7 +220,7 @@
 		request.onload = function() {
 			context.decodeAudioData(request.response, function(buffer) {
 				dogBarkingBuffer = buffer;
-			}, onError);
+			}, function(e){alert("Error!");});
 		}
 		request.send();
 		
@@ -258,7 +258,7 @@
 			},
 			function(e){alert("Error!");});
 		}*/
-		request.send();
+		//request.send();
 		
 		//gainNode.gain.value = 1.0;
 		document.getElementById("videoVolume").innerHTML = "VOLUME: "+volValue.toFixed();
