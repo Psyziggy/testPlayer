@@ -275,11 +275,11 @@
 	function togglePlayPause() { 
 		if (videoPlayer.paused || videoPlayer.ended) {
 			getData();
-			source.start(0);
-			changeButtonType(playPauseBtn, 'pause');
-			titleCard.style.visibility = 'hidden';
 			videoPlayer.playbackRate = spdValue;
 			videoPlayer.play();
+			changeButtonType(playPauseBtn, 'pause');
+			titleCard.style.visibility = 'hidden';
+			source.start(0);
 		}
 		else{ 
 			changeButtonType(playPauseBtn, 'play'); 
