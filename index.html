@@ -300,7 +300,7 @@
         function playClips() {
         videoPlayer.play();
         }*/
-	function togglePlayPause(buffer) { 
+	function togglePlayPause() { 
 		if (videoPlayer.paused || videoPlayer.ended) {
 			source.buffer = dogBarkingBuffer;                    // tell the source which sound to play
 			source.connect(context.destination);       // connect the source to the context's destination (the speakers)
