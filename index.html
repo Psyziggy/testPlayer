@@ -304,7 +304,6 @@
 		if (videoPlayer.paused || videoPlayer.ended) {
 			//source.buffer = dogBarkingBuffer;                    // tell the source which sound to play
 			source.connect(context.destination);       // connect the source to the context's destination (the speakers)
-			source.start(0);  
 			videoPlayer.play();
 			/*source = audioCtx.createBufferSource();
 			var request = new XMLHttpRequest();
@@ -338,6 +337,11 @@
 			//videoPlayer.currentTime = audioCtx.currentTime;
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
+			videoPlayer.onplaying = function() {
+			    source.start(0);
+			    //context.currentTime = videoPlayer.currentTime;
+			    alert("The video is now playing");
+			};
 		}
 		else{ 
 			changeButtonType(playPauseBtn, 'play'); 
@@ -346,10 +350,6 @@
 			//getData();
 		}
 	} 
-	function test(){
-		videoPlayer.play();
-		source.start(0);
-	}
 	function stopPlayer() {
 		source.stop(0);
 		videoPlayer.pause();
