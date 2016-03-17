@@ -339,7 +339,7 @@
 			titleCard.style.visibility = 'hidden';
 			videoPlayer.onplaying = function() {
 			    source.start(0);
-			    //context.currentTime = videoPlayer.currentTime;
+			    context.currentTime = videoPlayer.currentTime;
 			    alert("The video is now playing");
 			};
 		}
