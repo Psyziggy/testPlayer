@@ -281,7 +281,7 @@
 		if (videoPlayer.paused || videoPlayer.ended){
 			sound = audioContext.createBufferSource();
 			sound.buffer = sampleBuffer;
-			sound.playbackRate.value = spdValue;
+			sound.playbackRate.value = spdValue.value;
 			sound.connect(audioContext.destination);
 			videoPlayer.play();
 			sound.start(0,startOffset % sampleBuffer.duration);
@@ -361,8 +361,8 @@
 			new_spdValue = 2.0;
 		}
 		spdValue = new_spdValue;
-		videoPlayer.playbackRate = spdValue;
-		sound.playbackRate.value = spdValue;
+		videoPlayer.playbackRate = spdValue.value;
+		sound.playbackRate.value = spdValue.value;
 		document.getElementById("videoSpeed").innerHTML = "SPEED: x"+(new_spdValue.toFixed(1));
 	}
 	function replayMedia() 
