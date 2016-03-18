@@ -291,7 +291,7 @@
 			//getData();
 		}
 		else { 
-			source.stop();
+			sound.stop();
 			startOffset += audioContext.currentTime - startTime;
 			changeButtonType(playPauseBtn, 'play'); 
 			videoPlayer.pause();
@@ -299,7 +299,7 @@
 	} 
 	function stopPlayer() 
 	{
-		source.stop();
+		sound.stop();
 		startOffset = 0;
 		startTime = 0;
   		// Measure how much time passed since the last pause.
@@ -396,6 +396,9 @@
 	}
 	function resetPlayer() {
 		videoPlayer.currentTime = 0;
+		startOffset = 0;
+		startTime = 0;
+		sound.start(0,startOffset % sampleBuffer.duration);
 		changeButtonType(playPauseBtn, 'play');
 	}
 	</script>
