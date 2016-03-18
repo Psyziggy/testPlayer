@@ -263,23 +263,13 @@
 	
 	    request.send();
 	}
-	//elemental source
-	function getData() 
-	{
-		// Our <video> element will be the audio source.
-		audioSource.playbackRate = 0.5;
-		videoPlayer.playbackRate = 0.5;
-		audioSource.connect(gainNode);
-		gainNode.connect(context.destination);
-		videoPlayer.play();
-        }
 	function togglePlayPause() 
 	{ 
 		//if (videoPlayer.paused || videoPlayer.ended) //{
 			sound = audioContext.createBufferSource();
 			sound.buffer = sampleBuffer;
 			//sound.detune.value = -1000;
-			//sound.playbackRate.value = playbackSlider.value;
+			sound.playbackRate.value = 1.2;
 			sound.connect(audioContext.destination);
 			sound.start(0);
 			//videoPlayer.playbackRate = spdValue;
