@@ -281,7 +281,7 @@
 		if (videoPlayer.paused || videoPlayer.ended){
 			sound = audioContext.createBufferSource();
 			sound.buffer = sampleBuffer;
-			sound.playbackRate.value = spdValue.value;
+			sound.playbackRate.value = spdValue;
 			sound.connect(audioContext.destination);
 			videoPlayer.play();
 			sound.start(0,startOffset % sampleBuffer.duration);
