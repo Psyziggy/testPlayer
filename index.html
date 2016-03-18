@@ -281,6 +281,7 @@
 			sound.playbackRate.value = 1.2;
 			sound.connect(audioContext.destination);
 			sound.start(0);
+			videoPlayer.play();
 			//videoPlayer.playbackRate = spdValue;
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
