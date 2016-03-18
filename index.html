@@ -278,7 +278,7 @@
 	}
 	function togglePlayPause() 
 	{ 
-		if (videoPlayer.paused || videoPlayer.ended) //{
+		if (videoPlayer.paused || videoPlayer.ended){
 			sound = audioContext.createBufferSource();
 			sound.buffer = sampleBuffer;
 			sound.playbackRate.value = spdValue;
