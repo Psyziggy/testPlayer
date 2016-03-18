@@ -244,6 +244,7 @@
 		}, false);
 		videoPlayer.addEventListener('ended',replayMedia, false);
 		videoPlayer.controls = false;
+		videoPlayer.muted = true;
 	}
 	function addSourceToVideo(element, src) {
 		var vidSource = document.createElement('source');
