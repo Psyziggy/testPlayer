@@ -210,7 +210,7 @@
 	var audioSource = context.createMediaElementSource(videoPlayer);
 	var gainNode = context.createGain();*/
         var audioContext = new(window.AudioContext || window.webkitAudioContext)(),
-	    sampleURL = 'KSound.mp3',
+	    sampleURL = 'KClip.mp4',
 	    sampleBuffer, sound;
 	    
 	document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
@@ -282,7 +282,7 @@
 			//sound.playbackRate.value = playbackSlider.value;
 			sound.connect(audioContext.destination);
 			sound.start(0);
-			videoPlayer.playbackRate = spdValue;
+			//videoPlayer.playbackRate = spdValue;
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
 			//getData();
