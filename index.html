@@ -250,7 +250,7 @@
 		
 		vidSource.src = src;
 		//source.type = type;
-		vidSource..muted = true;
+		vidSource.muted = true;
 		element.appendChild(vidSource);
 	}
 	// function to load sounds via AJAX
@@ -280,8 +280,8 @@
 			//sound.detune.value = -1000;
 			sound.playbackRate.value = 1.2;
 			sound.connect(audioContext.destination);
-			sound.start(0);
 			videoPlayer.play();
+			sound.start(0);
 			//videoPlayer.playbackRate = spdValue;
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
