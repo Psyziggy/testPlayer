@@ -212,11 +212,18 @@
         var audioContext = new(window.AudioContext || window.webkitAudioContext)(),
 	    sampleURL = 'KClip.mp4',
 	    sampleBuffer, sound;
+	var vidSource = document.createElement('source');
+
+    source.src = src;
+    source.type = type;
+
+    element.appendChild(source);   
 	    
 	document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
 	
 	function initialiseMediaPlayer() 
 	{	
+		addSourceToVideo(videoPlayer, sampleURL);
 		//gainNode.gain.value = 1.0;
 		loadSound(sampleURL);
 		
@@ -243,6 +250,14 @@
 		}, false);
 		videoPlayer.addEventListener('ended',replayMedia, false);
 		videoPlayer.controls = false;
+	}
+	function addSourceToVideo(element, src) {
+		var source = document.createElement('source');
+		
+		source.src = src;
+		//source.type = type;
+		
+		element.appendChild(source);
 	}
 	// function to load sounds via AJAX
 	function loadSound(url) {
