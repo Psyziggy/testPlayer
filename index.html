@@ -212,6 +212,9 @@
         var audioContext = new(window.AudioContext || window.webkitAudioContext)(),
 	    sampleURL = 'KClip.mp4',
 	    sampleBuffer, sound;
+	    
+	var startOffset = 0;
+	var startTime = 0;
 
 	document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
 	
@@ -275,26 +278,31 @@
 	}
 	function togglePlayPause() 
 	{ 
-		//if (videoPlayer.paused || videoPlayer.ended) //{
+		if (videoPlayer.paused || videoPlayer.ended) //{
 			sound = audioContext.createBufferSource();
 			sound.buffer = sampleBuffer;
-			//sound.detune.value = -1000;
-			sound.playbackRate.value = 1.2;
+			sound.playbackRate.value = spdValue;
 			sound.connect(audioContext.destination);
 			videoPlayer.play();
-			sound.start(0);
+			sound.start(0,startOffset % sampleBuffer.duration);
 			//videoPlayer.playbackRate = spdValue;
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
 			//getData();
-		/*}
+		}
 		else { 
+			source.stop();
+			startOffset += audioContext.currentTime - startTime;
 			changeButtonType(playPauseBtn, 'play'); 
 			videoPlayer.pause();
-		}*/
+		}
 	} 
 	function stopPlayer() 
 	{
+		source.stop();
+		startOffset = 0;
+		startTime = 0;
+  		// Measure how much time passed since the last pause.
 		videoPlayer.pause();
 		videoPlayer.currentTime = 0;
 		changeButtonType(playPauseBtn, 'play');
@@ -354,6 +362,7 @@
 		}
 		spdValue = new_spdValue;
 		videoPlayer.playbackRate = spdValue;
+		sound.playbackRate = spdValue;
 		getData();
 		document.getElementById("videoSpeed").innerHTML = "SPEED: x"+(new_spdValue.toFixed(1));
 	}
