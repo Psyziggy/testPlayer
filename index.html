@@ -209,9 +209,10 @@
 	var context = new (window.AudioContext || window.webkitAudioContext)();
 	var audioSource = context.createMediaElementSource(videoPlayer);
 	var gainNode = context.createGain();*/
-        var audioContext = new(window.AudioContext || window.webkitAudioContext)(),
-	    sampleURL = 'KClip.mp4',
-	    sampleBuffer, sound;
+        var audioContext = new(window.AudioContext || window.webkitAudioContext)();
+	var sampleURL = 'KClip.mp4';
+	var sampleBuffer; 
+	var bufferSound;
 	    
 	var startOffset = 0;
 	var startTime = 0;
@@ -267,10 +268,6 @@
 			audioContext.decodeAudioData(request.response, function (buffer) {
 				var soundLength = buffer.duration;
 				sampleBuffer = buffer;
-				//loopStart.setAttribute('max', Math.floor(soundLength));
-				//loopEnd.setAttribute('max', Math.floor(soundLength));
-				//playButton.disabled = false;
-				////playButton.innerHTML = 'play';
 			});
 		};
 	
@@ -279,19 +276,19 @@
 	function togglePlayPause() 
 	{ 
 		if (videoPlayer.paused || videoPlayer.ended){
-			sound = audioContext.createBufferSource();
-			sound.buffer = sampleBuffer;
-			sound.playbackRate.value = spdValue;
-			sound.connect(audioContext.destination);
+			bufferSound = audioContext.createBufferSource();
+			bufferSound.buffer = sampleBuffer;
+			bufferSound.playbackRate.value = spdValue;
+			bufferSound.connect(audioContext.destination);
 			videoPlayer.play();
-			sound.start(0,startOffset % sampleBuffer.duration);
+			bufferSound.start(0,startOffset % sampleBuffer.duration);
 			//videoPlayer.playbackRate = spdValue;
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
 			//getData();
 		}
 		else { 
-			sound.stop();
+			bufferSound.stop();
 			startOffset += audioContext.currentTime - startTime;
 			changeButtonType(playPauseBtn, 'play'); 
 			videoPlayer.pause();
@@ -299,7 +296,7 @@
 	} 
 	function stopPlayer() 
 	{
-		sound.stop();
+		bufferSound.stop();
 		startOffset = 0;
 		startTime = 0;
   		// Measure how much time passed since the last pause.
@@ -397,7 +394,7 @@
 		videoPlayer.currentTime = 0;
 		startOffset = 0;
 		startTime = 0;
-		sound.start(0,startOffset % sampleBuffer.duration);
+		bufferSound.start(0,startOffset % sampleBuffer.duration);
 		changeButtonType(playPauseBtn, 'play');
 	}
 	</script>
