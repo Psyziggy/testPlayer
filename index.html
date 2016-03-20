@@ -281,7 +281,7 @@
 			bufferSound.playbackRate.value = spdValue;
 			bufferSound.connect(audioContext.destination);
 			videoPlayer.play();
-			bufferSound.start(0,startOffset % sampleBuffer.duration);
+			//bufferSound.start(0,startOffset % sampleBuffer.duration);
 			//videoPlayer.playbackRate = spdValue;
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
@@ -294,6 +294,9 @@
 			videoPlayer.pause();
 		}
 	} 
+	videoPlayer.oncanplay = function() {
+		bufferSound.start(0,startOffset % sampleBuffer.duration);
+	};
 	function stopPlayer() 
 	{
 		bufferSound.stop();
