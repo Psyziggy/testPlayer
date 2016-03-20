@@ -286,6 +286,9 @@
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
 			//getData();
+			if(document.querySelector('video').playing){ // checks if element is playing right now
+				bufferSound.start(0,startOffset % sampleBuffer.duration);
+			}
 		}
 		else { 
 			bufferSound.stop();
@@ -294,8 +297,13 @@
 			videoPlayer.pause();
 		}
 	} 
+	Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
+		get: function(){
+			return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
+		}
+	})
 	videoPlayer.oncanplay = function() {
-		bufferSound.start(0,startOffset % sampleBuffer.duration);
+		
 	};
 	function stopPlayer() 
 	{
