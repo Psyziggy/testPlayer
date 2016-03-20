@@ -218,7 +218,12 @@
 	var startTime = 0;
 
 	document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
-	
+//	if (document.addEventListener) {
+		document.videoClip.addEventListener("click", myFunction);
+	//} 
+	//else if (document.attachEvent) {
+	//	document.attachEvent("onclick", myFunction);
+	//}
 	function initialiseMediaPlayer() 
 	{	
 		addSourceToVideo(videoPlayer, sampleURL);
@@ -250,6 +255,9 @@
 		videoPlayer.controls = false;
 		videoPlayer.muted = true;
 	}
+	vid.addEventListener("playing", function() {
+	    	alert("The video is now playing");
+	});
 	function addSourceToVideo(element, src) {
 		var vidSource = document.createElement('source');
 		
@@ -297,14 +305,6 @@
 			videoPlayer.pause();
 		}
 	} 
-	Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
-		get: function(){
-			return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
-		}
-	})
-	videoPlayer.oncanplay = function() {
-		
-	};
 	function stopPlayer() 
 	{
 		bufferSound.stop();
