@@ -183,7 +183,7 @@
 					<source src='movieClip/KClip.webm' type='video/webm'>
 					<source src='movieClip/KClip.ogg' type='video/ogg'>
 			     --><div id="controlPanel">
-					<button id="playPauseButton" class="play" title="Play" alt="PLAY" onclick="togglePlayPause();"></button>
+					<button id="playPauseButton" class="play" title="Play" alt="PLAY" onclick="togglePlayPause();" disabled></button>
 					<button id="stopButton" class="bstop" title="Stop" alt="STOP" onclick="stopPlayer();"></button>
 					<button id="muteButton" class="unmute" title="Mute" alt="MUTE" onclick="toggleMute('true');"></button>
 					<button id="vprevButton" class="vprev" title="Softer" alt="VOLUME-" onclick="changeVolume('volumeValue',-1);"></button>
@@ -226,7 +226,7 @@
 	//}
 	function initialiseMediaPlayer() 
 	{	
-		var request = new XMLHttpRequest();
+		/*var request = new XMLHttpRequest();
 		request.open('GET', sampleURL, true);
 		request.responseType = 'arraybuffer';
 		
@@ -236,7 +236,7 @@
 				sampleBuffer = buffer;
 			});
 		};
-		request.send();
+		request.send();*/
 		addSourceToVideo(videoPlayer, sampleURL);
 		//gainNode.gain.value = 1.0;
 		//loadSound(sampleURL);
@@ -278,7 +278,7 @@
 		element.appendChild(vidSource);
 	}
 	// function to load sounds via AJAX
-	/*function loadSound(url) {
+	function loadSound(url) {
 		var request = new XMLHttpRequest();
 		request.open('GET', url, true);
 		request.responseType = 'arraybuffer';
@@ -287,10 +287,11 @@
 			audioContext.decodeAudioData(request.response, function (buffer) {
 				var soundLength = buffer.duration;
 				sampleBuffer = buffer;
+				playButton.disabled = false;
 			});
 		};
 		request.send();
-	}*/
+	}
 	// set our sound buffer, loop, and connect to destination
 	function setupSound() {
 	    bufferSound = audioContext.createBufferSource();
