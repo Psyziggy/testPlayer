@@ -275,7 +275,6 @@
 		request.onload = function () {
 			audioContext.decodeAudioData(request.response, function (buffer) {
 				var soundLength = buffer.duration;
-				bufferSound = audioContext.createBufferSource();
 				sampleBuffer = buffer;
 			});
 		};
@@ -285,6 +284,7 @@
 	function togglePlayPause() 
 	{ 
 		if (videoPlayer.paused || videoPlayer.ended){
+			bufferSound = audioContext.createBufferSource();
 			bufferSound.buffer = sampleBuffer;
 			bufferSound.playbackRate.value = spdValue;
 			bufferSound.connect(audioContext.destination);
