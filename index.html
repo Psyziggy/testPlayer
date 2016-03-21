@@ -284,11 +284,12 @@
 		request.responseType = 'arraybuffer';
 		alert("loading");
 		request.onload = function () {
+			alert("onLoad");
 			audioContext.decodeAudioData(request.response, function (buffer) {
+				alert("Ready");
 				//var soundLength = buffer.duration;
 				sampleBuffer = buffer;
 				//playPauseBtn.disabled = false;
-				alert("Ready");
 			});
 		};
 		request.send();
