@@ -300,9 +300,10 @@
 			setupSound();
 			//bufferSound = audioContext.createBufferSource();
 			//bufferSound.buffer = sampleBuffer;
-			bufferSound.playbackRate.value = spdValue;
-			bufferSound.connect(audioContext.destination);
+			//bufferSound.playbackRate.value = spdValue;
+			//bufferSound.connect(audioContext.destination);
 			videoPlayer.play();
+			sound.start(0);
 			//bufferSound.start(0,startOffset % sampleBuffer.duration);
 			//videoPlayer.playbackRate = spdValue;
 			changeButtonType(playPauseBtn, 'pause');
@@ -313,7 +314,7 @@
 			//getData();
 		}
 		else { 
-			bufferSound.stop();
+			sound.stop();
 			startOffset += audioContext.currentTime - startTime;
 			changeButtonType(playPauseBtn, 'play'); 
 			videoPlayer.pause();
@@ -321,7 +322,7 @@
 	} 
 	function stopPlayer() 
 	{
-		bufferSound.stop();
+		sound.stop();
 		startOffset = 0;
 		startTime = 0;
   		// Measure how much time passed since the last pause.
