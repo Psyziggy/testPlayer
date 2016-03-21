@@ -282,7 +282,7 @@
 		var request = new XMLHttpRequest();
 		request.open('GET', url, true);
 		request.responseType = 'arraybuffer';
-		
+		alert("loading");
 		request.onload = function () {
 			audioContext.decodeAudioData(request.response, function (buffer) {
 				var soundLength = buffer.duration;
