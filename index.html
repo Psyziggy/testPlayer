@@ -183,7 +183,7 @@
 					<source src='movieClip/KClip.webm' type='video/webm'>
 					<source src='movieClip/KClip.ogg' type='video/ogg'>
 			     --><div id="controlPanel">
-					<button id="playPauseButton" class="play" title="Play" alt="PLAY" onclick="togglePlayPause();" disabled></button>
+					<button id="playPauseButton" class="play" title="Play" alt="PLAY" onclick="togglePlayPause();"></button>
 					<button id="stopButton" class="bstop" title="Stop" alt="STOP" onclick="stopPlayer();"></button>
 					<button id="muteButton" class="unmute" title="Mute" alt="MUTE" onclick="toggleMute('true');"></button>
 					<button id="vprevButton" class="vprev" title="Softer" alt="VOLUME-" onclick="changeVolume('volumeValue',-1);"></button>
@@ -213,31 +213,20 @@
 	var sampleURL = 'KClip.mp4';
 	var sampleBuffer; //= audioContext.createBufferSource(); 
 	var bufferSound;
+	
+	var audioContext = new(window.AudioContext || window.webkitAudioContext)(),
+		sampleURL = 'KClip.mp4',
+		sampleBuffer, sound;
 	    
 	var startOffset = 0;
 	var startTime = 0;
 
 	document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
-//	if (document.addEventListener) {
-	//	document.videoClip.addEventListener("click", myFunction);
-	//} 
-	//else if (document.attachEvent) {
-	//	document.attachEvent("onclick", myFunction);
-	//}
+
 	function initialiseMediaPlayer() 
 	{	
-		/*var request = new XMLHttpRequest();
-		request.open('GET', sampleURL, true);
-		request.responseType = 'arraybuffer';
 		
-		request.onload = function () {
-			audioContext.decodeAudioData(request.response, function (buffer) {
-				var soundLength = buffer.duration;
-				sampleBuffer = buffer;
-			});
-		};
-		request.send();*/
-		addSourceToVideo(videoPlayer, sampleURL);
+		//addSourceToVideo(videoPlayer, sampleURL);
 		//gainNode.gain.value = 1.0;
 		loadSound(sampleURL);
 		
@@ -279,34 +268,36 @@
 		var request = new XMLHttpRequest();
 		request.open('GET', url, true);
 		request.responseType = 'arraybuffer';
-		alert("loading");
+		videoPlayer.innerHTML = "loading...";
 		request.onload = function () {
-			alert("onLoad");
 			audioContext.decodeAudioData(request.response, function (buffer) {
-				bufferSound = audioContext.createBufferSource();
-				//var soundLength = buffer.duration;
-				bufferSound.buffer = buffer;
-				//playPauseBtn.disabled = false;
-				alert("Ready");
+				var soundLength = buffer.duration;
+				sampleBuffer = buffer;
+				videoPlayer.innerHTML = "buffer...";
+				//loopStart.setAttribute('max', Math.floor(soundLength));
+				//loopEnd.setAttribute('max', Math.floor(soundLength));
+				//playButton.disabled = false;
+				//playButton.innerHTML = 'play';
 			});
 		};
+		
 		request.send();
 	}
 	// set our sound buffer, loop, and connect to destination
 	function setupSound() {
-	    
-	    //bufferSound.buffer = sampleBuffer;
-	    //sound.loop = loop;
-	    //sound.loopStart = loopStart.value;
-	    //sound.loopEnd = loopEnd.value;
-	    //sound.detune.value = -1000;
-	    //bufferSound.playbackRate.value = spdValue;
-	    //bufferSound.connect(audioContext.destination);
+		sound = audioContext.createBufferSource();
+		sound.buffer = sampleBuffer;
+		//sound.loop = loop;
+		//sound.loopStart = loopStart.value;
+		//sound.loopEnd = loopEnd.value;
+		//sound.detune.value = -1000;
+		//sound.playbackRate.value = playbackSlider.value;
+		sound.connect(audioContext.destination);
 	}
 	function togglePlayPause() 
 	{ 
 		if (videoPlayer.paused || videoPlayer.ended){
-			//setupSound();
+			setupSound();
 			//bufferSound = audioContext.createBufferSource();
 			//bufferSound.buffer = sampleBuffer;
 			bufferSound.playbackRate.value = spdValue;
@@ -316,9 +307,9 @@
 			//videoPlayer.playbackRate = spdValue;
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
-			videoPlayer.addEventListener("playing", function() {
-			    	bufferSound.start(0,startOffset % sampleBuffer.duration);
-			});
+			//videoPlayer.addEventListener("playing", function() {
+			//    	bufferSound.start(0,startOffset % sampleBuffer.duration);
+		//	});
 			//getData();
 		}
 		else { 
