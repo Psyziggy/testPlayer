@@ -211,7 +211,7 @@
 	var gainNode = context.createGain();*/
         var audioContext = new(window.AudioContext || window.webkitAudioContext)();
 	var sampleURL = 'KClip.mp4';
-	var sampleBuffer = audioContext.createBufferSource(); 
+	var sampleBuffer; //= audioContext.createBufferSource(); 
 	var bufferSound;
 	    
 	var startOffset = 0;
