@@ -287,7 +287,7 @@
 			audioContext.decodeAudioData(request.response, function (buffer) {
 				var soundLength = buffer.duration;
 				sampleBuffer = buffer;
-				playButton.disabled = false;
+				playPauseBtn.disabled = false;
 			});
 		};
 		request.send();
