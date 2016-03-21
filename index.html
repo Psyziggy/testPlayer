@@ -211,7 +211,7 @@
 	var gainNode = context.createGain();*/
         var audioContext = new(window.AudioContext || window.webkitAudioContext)();
 	var sampleURL = 'KClip.mp4';
-	var sampleBuffer; 
+	var sampleBuffer = audioContext.createBufferSource(); 
 	var bufferSound;
 	    
 	var startOffset = 0;
@@ -284,7 +284,7 @@
 	function togglePlayPause() 
 	{ 
 		if (videoPlayer.paused || videoPlayer.ended){
-			bufferSound = audioContext.createBufferSource();
+			//bufferSound = audioContext.createBufferSource();
 			bufferSound.buffer = sampleBuffer;
 			bufferSound.playbackRate.value = spdValue;
 			bufferSound.connect(audioContext.destination);
