@@ -266,9 +266,6 @@
 		videoPlayer.controls = false;
 		videoPlayer.muted = true;
 	}
-	videoPlayer.addEventListener("playing", function() {
-	    	bufferSound.start(0,startOffset % sampleBuffer.duration);
-	});
 	function addSourceToVideo(element, src) {
 		var vidSource = document.createElement('source');
 		
@@ -286,38 +283,42 @@
 		request.onload = function () {
 			alert("onLoad");
 			audioContext.decodeAudioData(request.response, function (buffer) {
-				alert("Ready");
+				bufferSound = audioContext.createBufferSource();
 				//var soundLength = buffer.duration;
-				sampleBuffer = buffer;
+				bufferSound.buffer = buffer;
 				//playPauseBtn.disabled = false;
+				alert("Ready");
 			});
 		};
 		request.send();
 	}
 	// set our sound buffer, loop, and connect to destination
 	function setupSound() {
-	    bufferSound = audioContext.createBufferSource();
-	    bufferSound.buffer = sampleBuffer;
+	    
+	    //bufferSound.buffer = sampleBuffer;
 	    //sound.loop = loop;
 	    //sound.loopStart = loopStart.value;
 	    //sound.loopEnd = loopEnd.value;
 	    //sound.detune.value = -1000;
-	    bufferSound.playbackRate.value = spdValue;
-	    bufferSound.connect(audioContext.destination);
+	    //bufferSound.playbackRate.value = spdValue;
+	    //bufferSound.connect(audioContext.destination);
 	}
 	function togglePlayPause() 
 	{ 
 		if (videoPlayer.paused || videoPlayer.ended){
-			setupSound();
+			//setupSound();
 			//bufferSound = audioContext.createBufferSource();
 			//bufferSound.buffer = sampleBuffer;
-			//bufferSound.playbackRate.value = spdValue;
-			//bufferSound.connect(audioContext.destination);
+			bufferSound.playbackRate.value = spdValue;
+			bufferSound.connect(audioContext.destination);
 			videoPlayer.play();
 			//bufferSound.start(0,startOffset % sampleBuffer.duration);
 			//videoPlayer.playbackRate = spdValue;
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
+			videoPlayer.addEventListener("playing", function() {
+			    	bufferSound.start(0,startOffset % sampleBuffer.duration);
+			});
 			//getData();
 		}
 		else { 
