@@ -239,7 +239,7 @@
 		request.send();*/
 		addSourceToVideo(videoPlayer, sampleURL);
 		//gainNode.gain.value = 1.0;
-		//loadSound(sampleURL);
+		loadSound(sampleURL);
 		
 		document.getElementById("videoVolume").innerHTML = "VOLUME: "+volValue.toFixed();
 		document.getElementById("videoSpeed").innerHTML = "SPEED: x"+spdValue.toFixed(1);
@@ -288,6 +288,7 @@
 				var soundLength = buffer.duration;
 				sampleBuffer = buffer;
 				playPauseBtn.disabled = false;
+				alert("Ready");
 			});
 		};
 		request.send();
