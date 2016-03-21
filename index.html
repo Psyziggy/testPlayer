@@ -256,7 +256,7 @@
 		videoPlayer.muted = true;
 	}
 	videoPlayer.addEventListener("playing", function() {
-	    	alert("The video is now playing");
+	    	bufferSound.start(0,startOffset % sampleBuffer.duration);
 	});
 	function addSourceToVideo(element, src) {
 		var vidSource = document.createElement('source');
@@ -294,9 +294,6 @@
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
 			//getData();
-			if(videoPlayer.playing){ // checks if element is playing right now
-				bufferSound.start(0,startOffset % sampleBuffer.duration);
-			}
 		}
 		else { 
 			bufferSound.stop();
