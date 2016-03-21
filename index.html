@@ -294,7 +294,7 @@
 			changeButtonType(playPauseBtn, 'pause');
 			titleCard.style.visibility = 'hidden';
 			//getData();
-			if(document.querySelector('video').playing){ // checks if element is playing right now
+			if(videoClip.playing){ // checks if element is playing right now
 				bufferSound.start(0,startOffset % sampleBuffer.duration);
 			}
 		}
