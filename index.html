@@ -268,12 +268,12 @@
 		var request = new XMLHttpRequest();
 		request.open('GET', url, true);
 		request.responseType = 'arraybuffer';
-		videoPlayer.innerHTML = "loading...";
+		//videoPlayer.innerHTML = "loading...";
 		request.onload = function () {
 			audioContext.decodeAudioData(request.response, function (buffer) {
 				var soundLength = buffer.duration;
 				sampleBuffer = buffer;
-				videoPlayer.innerHTML = "buffer...";
+				//videoPlayer.innerHTML = "buffer...";
 				//loopStart.setAttribute('max', Math.floor(soundLength));
 				//loopEnd.setAttribute('max', Math.floor(soundLength));
 				//playButton.disabled = false;
