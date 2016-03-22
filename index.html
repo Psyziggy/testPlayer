@@ -174,15 +174,15 @@
 		</style>
 	</head>
         <body>
-		<div id='playerRegion'>
+		<video controls></video>	
+		<div id='playerRegion'><!--
 			<div id='moviePlayer'>
 				<img id="titleCard"></img>
-				
 				<video controls></video><!--
 					<source src='KClip.mp4'></video>
 					<source src='movieClip/KClip.webm' type='video/webm'>
 					<source src='movieClip/KClip.ogg' type='video/ogg'>
-			     --><div id="controlPanel">
+			     <div id="controlPanel">
 					<button id="playPauseButton" class="play" title="Play" alt="PLAY" onclick="togglePlayPause();"></button>
 					<button id="stopButton" class="bstop" title="Stop" alt="STOP" onclick="stopPlayer();"></button>
 					<button id="muteButton" class="unmute" title="Mute" alt="MUTE" onclick="toggleMute('true');"></button>
@@ -192,7 +192,7 @@
 					<button id="sprevButton" class="sprev" title="Slower" alt="SPEED-" onclick="changeSpeed(videoSpeed,-0.1);"></button>
 					<p id="videoSpeed" title="Movie Speed"></p>
 					<button id="snextButton" class="snext" title="Faster" alt="SPEED-" onclick="changeSpeed(videoSpeed,0.1);"></button>
-				</div>
+				</div>-->
 			</div>
 		</div>	
         </body>
