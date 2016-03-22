@@ -178,7 +178,7 @@
 			<div id='moviePlayer'>
 				<img id="titleCard"></img>
 				
-				<video id='videoClips' controls></video><!--
+				<video controls></video><!--
 					<source src='KClip.mp4'></video>
 					<source src='movieClip/KClip.webm' type='video/webm'>
 					<source src='movieClip/KClip.ogg' type='video/ogg'>
@@ -197,6 +197,45 @@
 		</div>	
         </body>
 	<script>
+	var video = document.querySelector('video');
+	var assetURL = 'KClip.mp4';
+	// Need to be specific for Blink regarding codecs
+	// ./mp4info frag_bunny.mp4 | grep Codec
+	var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+	
+	if ('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec)) {
+		var mediaSource = new MediaSource;
+		//console.log(mediaSource.readyState); // closed
+		video.src = URL.createObjectURL(mediaSource);
+		mediaSource.addEventListener('sourceopen', sourceOpen);
+	} 
+	else {
+		console.error('Unsupported MIME type or codec: ', mimeCodec);
+	}
+	function sourceOpen (_) {
+	//console.log(this.readyState); // open
+		var mediaSource = this;
+		var sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
+		fetchAB(assetURL, function (buf) {
+			sourceBuffer.addEventListener('updateend', function (_) {
+				mediaSource.endOfStream();
+				video.play();
+			//console.log(mediaSource.readyState); // ended
+			});
+			sourceBuffer.appendBuffer(buf);
+		});
+	};
+	function fetchAB (url, cb) {
+		console.log(url);
+		var xhr = new XMLHttpRequest;
+		xhr.open('get', url);
+		xhr.responseType = 'arraybuffer';
+		xhr.onload = function () {
+			cb(xhr.response);
+		};
+		xhr.send();
+	};
+	/*
 	var songLength;
 	var titlecard = document.getElementById('titleCard'); 
 	var videoPlayer = document.getElementById('videoClips');
@@ -209,7 +248,7 @@
 	/*
 	var context = new (window.AudioContext || window.webkitAudioContext)();
 	var audioSource = context.createMediaElementSource(videoPlayer);
-	var gainNode = context.createGain();*/
+	var gainNode = context.createGain();
 	
 	var audioContext = new(window.AudioContext || window.webkitAudioContext)(),
 		sampleURL = 'KClip.mp4',
@@ -217,7 +256,7 @@
 	    
 	var startOffset = 0;
 	var startTime = 0;
-/*	
+	
 	document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
 
 	function initialiseMediaPlayer() 
@@ -251,44 +290,7 @@
 		videoPlayer.addEventListener('ended',replayMedia, false);
 		videoPlayer.controls = false;
 		videoPlayer.muted = true;
-	}*/
-	var assetURL = 'KClip.mp4';
-	// Need to be specific for Blink regarding codecs
-	// ./mp4info frag_bunny.mp4 | grep Codec
-	var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
-	
-	if ('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec)) {
-		var mediaSource = new MediaSource;
-		//console.log(mediaSource.readyState); // closed
-		videoPlayer.src = URL.createObjectURL(mediaSource);
-		mediaSource.addEventListener('sourceopen', sourceOpen);
-	} 
-	else {
-		console.error('Unsupported MIME type or codec: ', mimeCodec);
 	}
-	function sourceOpen (_) {
-	//console.log(this.readyState); // open
-		var mediaSource = this;
-		var sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
-		fetchAB(assetURL, function (buf) {
-			sourceBuffer.addEventListener('updateend', function (_) {
-				mediaSource.endOfStream();
-				videoPlayer.play();
-			//console.log(mediaSource.readyState); // ended
-			});
-			sourceBuffer.appendBuffer(buf);
-		});
-	};
-	function fetchAB (url, cb) {
-		console.log(url);
-		var xhr = new XMLHttpRequest;
-		xhr.open('get', url);
-		xhr.responseType = 'arraybuffer';
-		xhr.onload = function () {
-			cb(xhr.response);
-		};
-		xhr.send();
-	};/*
 	function addSourceToVideo(element, src) {
 		var vidSource = document.createElement('source');
 		
