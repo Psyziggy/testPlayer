@@ -217,7 +217,7 @@
 	    
 	var startOffset = 0;
 	var startTime = 0;
-	
+/*	
 	document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
 
 	function initialiseMediaPlayer() 
@@ -251,7 +251,7 @@
 		videoPlayer.addEventListener('ended',replayMedia, false);
 		videoPlayer.controls = false;
 		videoPlayer.muted = true;
-	}
+	}*/
 	var assetURL = 'KClip.mp4';
 	// Need to be specific for Blink regarding codecs
 	// ./mp4info frag_bunny.mp4 | grep Codec
@@ -288,7 +288,7 @@
 			cb(xhr.response);
 		};
 		xhr.send();
-	};
+	};/*
 	function addSourceToVideo(element, src) {
 		var vidSource = document.createElement('source');
 		
@@ -457,7 +457,7 @@
 		startTime = 0;
 		bufferSound.start(0,startOffset % sampleBuffer.duration);
 		changeButtonType(playPauseBtn, 'play');
-	}
+	}*/
 	</script>
 </html>
 <!--Status API Training Shop Blog About Pricing
