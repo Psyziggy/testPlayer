@@ -74,11 +74,11 @@
 				-moz-transition: height .25s ease-in-out;
 				-webkit-transition: height .25s ease-in-out;
 				-o-background-transition: height .25s ease-in-out;
-			}
+			}/*
 			div#moviePlayer:hover > div#controlPanel
 			{
 				height: 44px;
-			}
+			}*/
 			
 			button 
 			{
@@ -200,6 +200,7 @@
 	var songLength;
 	var titlecard = document.getElementById('titleCard'); 
 	var videoPlayer = document.getElementById('videoClips');
+	//var video = document.getElementById('videoClips');
 	var playPauseBtn = document.getElementById('playPauseButton');
 	var muteBtn = document.getElementById('muteButton');
 	var volValue = 3.0;
@@ -214,10 +215,10 @@
 		sampleURL = 'KClip.mp4',
 		sampleBuffer, sound;
 	    
-var startOffset = 0;
-var startTime = 0;
-
-document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
+	var startOffset = 0;
+	var startTime = 0;
+	
+	document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
 
 	function initialiseMediaPlayer() 
 	{	
@@ -259,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer
 	if ('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec)) {
 		var mediaSource = new MediaSource;
 		//console.log(mediaSource.readyState); // closed
-		video.src = URL.createObjectURL(mediaSource);
+		videoPlayer.src = URL.createObjectURL(mediaSource);
 		mediaSource.addEventListener('sourceopen', sourceOpen);
 	} 
 	else {
@@ -272,7 +273,7 @@ document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer
 		fetchAB(assetURL, function (buf) {
 			sourceBuffer.addEventListener('updateend', function (_) {
 				mediaSource.endOfStream();
-				video.play();
+				videoPlayer.play();
 			//console.log(mediaSource.readyState); // ended
 			});
 			sourceBuffer.appendBuffer(buf);
