@@ -209,13 +209,9 @@
 	var context = new (window.AudioContext || window.webkitAudioContext)();
 	var audioSource = context.createMediaElementSource(videoPlayer);
 	var gainNode = context.createGain();*/
-        var audioContext = new(window.AudioContext || window.webkitAudioContext)();
-	var sampleURL = 'KClip.mp4';
-	var sampleBuffer; //= audioContext.createBufferSource(); 
-	var bufferSound;
 	
 	var audioContext = new(window.AudioContext || window.webkitAudioContext)(),
-		sampleURL = 'KClip.mp4',
+		sampleURL = 'KSound.mp3',
 		sampleBuffer, sound;
 	    
 	var startOffset = 0;
@@ -226,7 +222,7 @@
 	function initialiseMediaPlayer() 
 	{	
 		
-		addSourceToVideo(videoPlayer, sampleURL);
+		//addSourceToVideo(videoPlayer, sampleURL);
 		//gainNode.gain.value = 1.0;
 		loadSound(sampleURL);
 		
@@ -273,6 +269,7 @@
 			audioContext.decodeAudioData(request.response, function (buffer) {
 				var soundLength = buffer.duration;
 				sampleBuffer = buffer;
+				alert("Ready");
 				//videoPlayer.innerHTML = "buffer...";
 				//loopStart.setAttribute('max', Math.floor(soundLength));
 				//loopEnd.setAttribute('max', Math.floor(soundLength));
