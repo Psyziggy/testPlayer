@@ -263,10 +263,11 @@
 			audioContext.decodeAudioData(request.response, function (buffer) {
 				var soundLength = buffer.duration;
 				sampleBuffer = buffer;
-				loopStart.setAttribute('max', Math.floor(soundLength));
-				loopEnd.setAttribute('max', Math.floor(soundLength));
-				playButton.disabled = false;
-				playButton.innerHTML = 'play';
+				alert("Ready!");
+				//loopStart.setAttribute('max', Math.floor(soundLength));
+				//loopEnd.setAttribute('max', Math.floor(soundLength));
+				//playButton.disabled = false;
+				//playButton.innerHTML = 'play';
 			});
 		};
 	
